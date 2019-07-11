@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_eagleedu_class_standard_tree" model="ir.ui.view">
+        <field name="name">eagleedu.standard_class.tree</field>
+        <field name="model">eagleedu.standard_class</field>
+        <field name="arch" type="xml">
+            <tree string="Standard">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_eagleedu_standard_class_form" model="ir.ui.view">
+        <field name="name">eagleedu.standard_class.form</field>
+        <field name="model">eagleedu.standard_class</field>
+        <field name="arch" type="xml">
+            <form string="Standard">
+                <div class="oe_button_box" name="button_box">
+                    <button name="view_division" type="object" widget="statinfo" class="oe_stat_button" icon="fa-user" >
+                    </button>
+                    <button name="view_section" type="object" widget="statinfo" class="oe_stat_button" icon="fa-list-ol" >
+                    </button>
+                </div>
+                <group >
+                    <field name="name"/>
+                </group>
+                    <group string="Sections">
+
+                    </group>
+                <notebook>
+                        <page string="Syllabus">
+                        </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_eagleedu_standard_class_tree" model="ir.actions.act_window">
+        <field name="name">Standard</field>
+        <field name="res_model">eagleedu.standard_class</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first class here.
+            </p>
+        </field>
+    </record>
+
+
+    <record id="action_eagleedu_class_section_tree" model="ir.actions.act_window">
+        <field name="name">Section</field>
+        <field name="res_model">eagleedu.class_section</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first class here.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_eagleedu_academicyear_tree" model="ir.actions.act_window">
+        <field name="name">Academic Year</field>
+        <field name="res_model">eagleedu.academicyear</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your Academic Year
+            </p>
+        </field>
+    </record>
+
+
+
+
+    <menuitem action="action_eagleedu_standard_class_tree" parent="eagleedu_main_menu"
+              name= "Class" id="eagleedu_class_standard_menu" sequence="1"/>
+
+    <menuitem action="action_eagleedu_class_section_tree" parent="eagleedu_main_menu"
+              id="eagleedu_class_section_menu" name= "Section" sequence="2"/>
+
+    <menuitem action="action_eagleedu_academicyear_tree" parent="eagleedu_main_menu"
+              id="eagleedu_academicyear_menu" name= "Academic Year" sequence="3"/>
+
+
+</odoo>

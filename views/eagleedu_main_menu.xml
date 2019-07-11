@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <menuitem id="eagleedu_menu_root" name="Eagle Education" sequence="30"/>
+    <menuitem id="eagleedu_main_menu" name="Settings" parent="eagleedu_menu_root" sequence="40"/>
+
+</odoo>

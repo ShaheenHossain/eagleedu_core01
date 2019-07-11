@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_eagleedu_class_division_kanban">
+        <field name="name">eagleedu.class_division.kanban</field>
+        <field name="model">eagleedu.class_division</field>
+        <field name="arch" type="xml">
+            <kanban class="eagleedu_class_division_kanban">
+                <field name="class_division_name"/>
+                <field name="instructor_id"/>
+                <field name="group_division"/>
+                <field name="instructor_name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings" style="text-align:center !important;">
+                                        <strong class="o_kanban_record_title">
+                                            <field name="class_division_name"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                <ul style="text-align:center !important;">
+
+                                    <li t-if="record.academicyear.raw_value">
+                                        Academic Year : <field name="academicyear"/>
+                                    </li>
+                                    <li t-if="record.instructor_name.raw_value">
+                                        Instructor : <field name="instructor_name"/>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_eagleedu_class_division_tree" model="ir.ui.view">
+        <field name="name">eagleedu.class_division.tree</field>
+        <field name="model">eagleedu.class_division</field>
+        <field name="arch" type="xml">
+            <tree string="Class Division">
+                <field name="class_division_name"/>
+                <field name="academicyear"/>
+                <field name="instructor_id"/>
+                <field name="instructor_name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_eagleedu_class_division_form" model="ir.ui.view">
+        <field name="name">eagleedu.class_division.form</field>
+        <field name="model">eagleedu.class_division</field>
+        <field name="arch" type="xml">
+            <form string="Class Division">
+                <sheet string="Class">
+                        <group col="4">
+                            <field name="class_division_name"/>
+                            <field name="academicyear" attrs="{'readonly':[('id','>',0)]}"/>
+                            <field name="instructor_name" string="Intructor Name" attrs="{'readonly':[('id','>',0)]}"/>/>
+                            <field name="standard_class" attrs="{'readonly':[('id','>',0)]}"/>
+                            <field name="group_division" attrs="{'readonly':[('id','>',0)]}"/>
+                            <field name="class_section" attrs="{'readonly':[('id','>',0)]}"/>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="view_eagleedu_class_division_search" model="ir.ui.view">
+        <field name="name">Class Division </field>
+        <field name="model">eagleedu.class_division</field>
+        <field name="arch" type="xml">
+            <search string="Search Class Sections">
+                <field name="academicyear"/>
+                <!--<filter string="Rejected" name="rejected" domain="[('state','=','reject')]"/>-->
+                <group expand='0' string='Group by...'>
+                    <filter string='Academic Year' name="group_batch" icon="fa-user" domain="[]" context="{'group_by' : 'academicyear'}"/>
+               </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_eagleedu_class_division" model="ir.actions.act_window">
+        <field name="name">Class Division</field>
+        <field name="res_model">eagleedu.class_division</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first Class Division here.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="eagleedu_division_menu" name="Class Division"
+            parent="eagleedu_menu_root" action="action_eagleedu_class_division"/>
+
+</odoo>

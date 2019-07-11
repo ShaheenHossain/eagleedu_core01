@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_eagleedu_instructor_kanban">
+        <field name="name">eagleedu.instructor.kanban</field>
+        <field name="model">eagleedu.instructor</field>
+        <field name="arch" type="xml">
+            <kanban class="eagleedu_instructor_kanban">
+                <field name="instructor_id"/>
+                <field name="ins_name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="o_kanban_image">
+                                <t t-if="record.image.raw_value">
+                                    <img t-att-src="kanban_image('eagleedu.instructor', 'ins_image', record.id.raw_value)"/>
+                                </t>
+                                <t t-if="!record.image.raw_value">
+                                    <img t-att-src='_s + "/base/static/src/img/avatar.png"'/>
+                                </t>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title oe_partner_heading"><field name="ins_name"/></strong>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_eagleedu_instructor_tree" model="ir.ui.view">
+        <field name="name">eagleedu.instructor.tree</field>
+        <field name="model">eagleedu.instructor</field>
+        <field name="arch" type="xml">
+            <tree string="Instructor">
+                <field name="instructor_id"/>
+                <field name="ins_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_eagleedu_instructor_form" model="ir.ui.view">
+        <field name="name">eagleedu.instructor.form</field>
+        <field name="model">eagleedu.instructor</field>
+        <field name="arch" type="xml">
+            <form string="Instructor">
+                <sheet>
+                    <field name="ins_image" widget="image" class="oe_left oe_avatar" />
+                    <div class="oe_title">
+                        <h3>
+                            <label for ='instructor_id'/>
+                            <field name="instructor_id" attrs="{'invisible': [('instructor_id', '!=','')]}"/>
+                            <field name="instructor_id" />
+                        </h3>
+                        <h2>
+                            <table>
+                                <tr>
+                                    <td style="padding-right:10px;"><field name="ins_name" placeholder="Name of Instructor" required="1"/></td>
+                                </tr>
+                            </table>
+                        </h2>
+                    </div>
+                    <notebook>
+                        <page string="Instructor Details">
+                            <separator string="Basic Details"/>
+                            <separator string="instructor Info"/>
+                            <group>
+                                <group>
+                                    <field name="ins_father_name" string="Father's Name"/>
+                                    <field name="ins_mother_name" string="Mother's Name"/>
+                                    <field name="ins_gender"/>
+                                    <field name="ins_date_of_birth"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Contact Details">
+                        </page>
+                        <page string="Class History">
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="action_eagleedu_instructor" model="ir.actions.act_window">
+        <field name="name">Instructor</field>
+        <field name="res_model">eagleedu.instructor</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first instructor here.
+            </p>
+        </field>
+    </record>
+
+    <record id="seq_eagleedu_instructor" model="ir.sequence">
+        <field name="name">Instructor Seq</field>
+        <field name="res_model">eagleedu.instructor</field>
+        <field name="code">eagleedu.instructor</field>
+        <field name="prefix">INS</field>
+        <field name="number_increment">1</field>
+        <field name="padding">6</field>
+    </record>
+
+
+    <menuitem id="eagleedu_instructor_menu" name="Instructor"
+            parent="eagleedu_menu_root" action="action_eagleedu_instructor"/>
+
+</odoo>
+

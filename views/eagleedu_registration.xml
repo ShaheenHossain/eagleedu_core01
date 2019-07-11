@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_eagleedu_registration_kanban">
+        <field name="name">eagleedu.registration.kanban</field>
+        <field name="model">eagleedu.registration</field>
+        <field name="arch" type="xml">
+            <kanban class="eagleedu_registration_kanban">
+                <field name="registration_no"/>
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="o_kanban_image">
+                                <t t-if="record.image.raw_value">
+                                    <img t-att-src="kanban_image('eagleedu.student', 'image', record.id.raw_value)"/>
+                                </t>
+                                <t t-if="!record.image.raw_value">
+                                    <img t-att-src='_s + "/base/static/src/img/avatar.png"'/>
+                                </t>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_eagleedu_registration_tree" model="ir.ui.view">
+        <field name="name">eagleedu.registration.tree</field>
+        <field name="model">eagleedu.registration</field>
+        <field name="arch" type="xml">
+            <tree string="Student">
+                <field name="registration_no"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_eagleedu_registration_form" model="ir.ui.view">
+        <field name="name">eagleedu.registration.form</field>
+        <field name="model">eagleedu.registration</field>
+        <field name="arch" type="xml">
+            <form string="Student registration">
+                <header>
+                   <button name="send_to_verify" type="object" class="oe_highlight"
+                     string="Send for Verification" groups="base.group_user"
+                     help="Click to send the application for verification purpose"
+                     states="draft"/>
+                   <button name="application_verify" type="object" class="oe_highlight"
+                     string="Verify Application" groups="base.group_user"
+                     help="Click to verify the application and documents"
+                     states="verification"/>
+                   <button name="create_student" string="Create Student"
+                     type="object" class="oe_highlight"
+                     help="Click to create Student"
+                     states="approve"/>
+                     <field name="state" widget="statusbar" statusbar_visible="draft,verify,approve,done"/>
+                 </header>
+            <sheet>
+               <div class="oe_button_box" name="button_box">
+                   <button name="student_documents" type="object" widget="statinfo"
+                        class="oe_stat_button" icon="fa-calendar" string="Documents">
+                   </button>
+               </div>
+               <field name="st_image" widget="image" class="oe_left oe_avatar" />
+               <div class="oe_title">
+                  <h3>
+                    <label for ='registration_no'/>
+                    <field name="registration_no" attrs="{'invisible': [('registration_no', '!=','')]}"/>
+                    <field name="registration_no" />
+                  </h3>
+                  <h2>
+                      <table>
+                        <tr>
+                          <td style="padding-right:10px;"><field name="name" placeholder="Name" required="1"/></td>
+                        </tr>
+                      <tr>
+                       <td style="padding-right:10px;"><field name="st_name_b" placeholder="নাম " required="0"/></td>
+                      </tr>
+                   </table>
+                  </h2>
+                </div>
+
+                  <group string="Basic Details">
+                    <field name="date_of_birth"/>
+                    <field name="registration_date"/>
+                    <field name="st_gender"/>
+                    <field name="st_blood_group"/>
+                    <field name="religious_id"/>
+                    <field name="st_passport_no"/>
+                  </group>
+
+                  <group string="Academic Information">
+                    <field name="academic_year"/>
+                    <field name="standard_class" string="Wish to Admit"/>
+                    <field name="group_division" string="Group/Division"/>
+                  </group>
+
+                  <group string="Student Information">
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="mobile"/>
+                  </group>
+
+                  <group string="Parent's Information">
+                    <field name="st_father_name"/>
+                    <field name="st_father_name_b"/>
+                    <field name="st_father_occupation"/>
+                    <field name="father_mobile"/>
+                    <field name="st_mother_name"/>
+                    <field name="st_mother_name_b"/>
+                    <field name="st_mother_occupation"/>
+                    <field name="mother_mobile"/>
+                  </group>
+
+                  <group string="Present Address">
+                    <field name="house_no"/>
+                    <field name="road_no"/>
+                    <field name="post_office"/>
+                    <field name="city"/>
+                    <field name="bd_division_id"/>
+                    <field name="country_id"/>
+                  </group>
+
+                  <group string="Permanent Address">
+                    <field name="per_village"/>
+                    <field name="per_po"/>
+                    <field name="per_ps"/>
+                    <field name="per_dist_id"/>
+                    <field name="bd_division_id"/>
+                    <field name="country_id"/>
+                  </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="eagleedu_registration_search" model="ir.ui.view">
+        <field name="name">Student Registration</field>
+        <field name="model">eagleedu.registration</field>
+        <field name="arch" type="xml">
+            <search string="Search registration">
+                <field name="registration_no"/>
+                <group expand='0' string='Group by...'>
+                    <filter string='Religious' icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'religious_id'}"/>
+               </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_eagleedu_registration" model="ir.actions.act_window">
+        <field name="name">Registration</field>
+        <field name="res_model">eagleedu.registration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="search_view_id" ref="eagleedu_registration_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create the your first registration here.
+            </p>
+        </field>
+    </record>
+
+    <record id="seq_eagleedu_registration" model="ir.sequence">
+        <field name="name">Registration Seq</field>
+        <field name="res_model">eagleedu.registration</field>
+        <field name="code">eagleedu.registration</field>
+        <field name="prefix">SR</field>
+        <field name="number_increment">1</field>
+        <field name="padding">6</field>
+    </record>
+
+
+    <menuitem id="eagleedu_registration_menu" name="Registration"
+            parent="eagleedu_menu_root" action="action_eagleedu_registration"/>
+
+</odoo>
+
