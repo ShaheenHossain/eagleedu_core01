@@ -50,7 +50,6 @@ class EagleeduRegistration(models.Model):
     guardian_name = fields.Char(string="Guardian's Name", help="Proud to say my guardian is")
     guardian_relation = fields.Many2one('eagleedu.guardian.relation', string="Guardian's Relation", help="Proud to say my guardian is")
     guardian_mobile = fields.Char(string="Guardian's Mobile")
-    guardian_name = fields.Char(string="Guardian's Name")
 
     religious_id = fields.Many2one('eagleedu.religious', string="Religious", help="My Religion is ")
     student_id=fields.Char('Student Id')
@@ -108,20 +107,50 @@ class EagleeduRegistration(models.Model):
         for rec in self:
             values = {
                 'name': rec.name,
+                'st_name_b': rec.st_name_b,
+                'date_of_birth': rec.date_of_birth,
+                'st_gender': rec.st_gender,
+                'st_passport_no': rec.st_passport_no,
+                'registration_date': rec.registration_date,
                 'registration_no': rec.registration_no,
                 'standard_class': rec.standard_class.id,
                 'academic_year': rec.academic_year.id,
                 'group_division': rec.group_division.id,
                 'st_image': rec.st_image,
+                'st_father_name': rec.st_father_name,
+                'st_father_name_b': rec.st_father_name_b,
+                'st_father_email': rec.st_father_email,
+                'father_mobile': rec.father_mobile,
+                'st_father_occupation': rec.st_father_occupation,
+                'st_mother_name': rec.st_mother_name,
+                'st_mother_name_b': rec.st_mother_name_b,
+                'mother_mobile': rec.mother_mobile,
+                'st_mother_occupation': rec.st_mother_occupation,
                 'company_id': rec.company_id.id,
                 'email':rec.email,
                 'phone':rec.phone,
                 'mobile':rec.mobile,
                 'nationality': rec.nationality.id,
-
-
-
+                'house_no': rec.house_no,
+                'road_no': rec.road_no,
+                'post_office': rec.post_office,
+                'city': rec.city,
+                'bd_division_id': rec.bd_division_id.id,
+                'country_id': rec.country_id.id,
+                'per_village': rec.per_village,
+                'per_po': rec.per_po,
+                'per_ps': rec.per_ps,
+                'per_dist_id': rec.per_dist_id.id,
+                'per_country_id': rec.per_country_id.id,
+                'guardian_name': rec.guardian_name,
+                'guardian_relation': rec.guardian_relation,
+                'guardian_mobile': rec.guardian_mobile,
+                'religious_id': rec.religious_id.id,
+                'student_id': rec.student_id,
+                'roll_no': rec.roll_no,
+                'section': rec.section,
             }
+
             student = self.env['eagleedu.student'].create(values)
             rec.write({
                 'state': 'done'

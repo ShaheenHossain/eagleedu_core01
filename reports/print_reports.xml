@@ -1,12 +1,12 @@
 <odoo>
     <data>
         <report
-            id="action_report_eedustudent_abedon"
-            model="eedustudent.abedon"
+            id="action_report_eagleedu_registration"
+            model="eagleedu.registration"
             string="Print Student Application"
             report_type="qweb-pdf"
-            name="eagleedu_core.report_eedustudent_abedon"
-            file="eagleedu_core.report_eedustudent_abedon"
+            name="eagleedu_core.report_eagleedu_registration"
+            file="eagleedu_core.report_eagleedu_registration"
         />
     </data>
 </odoo>
